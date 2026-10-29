@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lớp Chuyên Toán Thầy Mẫn - Trình Chiếu ex_test &amp; TikZ CDN Sync</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 900: '#312e81' },
+            fuchsia: { 500: '#d946ef', 600: '#c026d3' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- TikJax Engine -->
+  <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+  <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+  <!-- MathJax 3 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'annotation', 'annotation-xml'] }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root, body[data-theme="cyber"] {
+      --bg-main: #020617;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(15, 23, 42, 0.72);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 255, 255, 0.18);
+      --nav-bg: rgba(2, 6, 23, 0.88);
+      --box-bg: rgba(30, 41, 59, 0.45);
+      --box-border: rgba(255, 255, 255, 0.1);
+      --glow-1: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.18) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-2: radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.14) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-3: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.12) 0%, rgba(0, 0, 0, 0) 65%);
+      --input-bg: rgba(15, 23, 42, 0.6);
+      --dropdown-bg: rgba(15, 23, 42, 0.95);
+      --solution-bg: rgba(245, 158, 11, 0.1);
+      --solution-border: rgba(245, 158, 11, 0.4);
+      --logo-bg: #020617;
+      --timer-bg: rgba(30, 41, 59, 0.5);
+      --timer-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body[data-theme="aurora"] {
+      --bg-main: #0d0722;
+      --text-main: #fae8ff;
+      --text-muted: #c084fc;
+      --card-bg: rgba(24, 15, 52, 0.75);
+      --card-border: rgba(217, 70, 239, 0.22);
+      --card-border-hover: rgba(217, 70, 239, 0.45);
+      --nav-bg: rgba(13, 7, 34, 0.9);
+      --box-bg: rgba(45, 26, 84, 0.45);
+      --box-border: rgba(217, 70, 239, 0.2);
+      --glow-1: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.25) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-2: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.22) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-3: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.2) 0%, rgba(0, 0, 0, 0) 65%);
+      --input-bg: rgba(24, 15, 52, 0.7);
+      --dropdown-bg: rgba(24, 15, 52, 0.96);
+      --solution-bg: rgba(217, 70, 239, 0.12);
+      --solution-border: rgba(217, 70, 239, 0.4);
+      --logo-bg: #0d0722;
+      --timer-bg: rgba(45, 26, 84, 0.5);
+      --timer-border: rgba(217, 70, 239, 0.25);
+    }
+
+    body[data-theme="pearl"] {
+      --bg-main: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(203, 213, 225, 0.8);
+      --card-border-hover: rgba(99, 102, 241, 0.5);
+      --nav-bg: rgba(255, 255, 255, 0.92);
+      --box-bg: rgba(248, 250, 252, 0.95);
+      --box-border: rgba(203, 213, 225, 0.8);
+      --glow-1: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-2: radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.08) 0%, rgba(0, 0, 0, 0) 65%);
+      --glow-3: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.08) 0%, rgba(0, 0, 0, 0) 65%);
+      --input-bg: #ffffff;
+      --dropdown-bg: rgba(255, 255, 255, 0.98);
+      --solution-bg: rgba(245, 158, 11, 0.12);
+      --solution-border: rgba(217, 119, 6, 0.4);
+      --logo-bg: #ffffff;
+      --timer-bg: rgba(226, 232, 240, 0.7);
+      --timer-border: rgba(148, 163, 184, 0.4);
+    }
+
+    body { 
+      background-color: var(--bg-main); 
+      color: var(--text-main); 
+      font-family: 'Inter', sans-serif; 
+      overflow-x: hidden; 
+      transition: background-color 0.3s ease, color 0.3s ease; 
+    }
+
+    .theme-box {
+      background-color: var(--box-bg);
+      border: 1px solid var(--box-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .theme-input {
+      background-color: var(--input-bg);
+      color: var(--text-main);
+      border: 1px solid var(--box-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-text-muted { color: var(--text-muted); }
+
+    .ambient-glow-1 { position: fixed; top: -20%; left: -10%; width: 70vw; height: 70vw; background: var(--glow-1); pointer-events: none; z-index: 0; animation: float1 15s ease-in-out infinite alternate; }
+    .ambient-glow-2 { position: fixed; bottom: -20%; right: -10%; width: 80vw; height: 80vw; background: var(--glow-2); pointer-events: none; z-index: 0; animation: float2 20s ease-in-out infinite alternate; }
+    .ambient-glow-3 { position: fixed; top: 20%; left: 20%; width: 60vw; height: 60vw; background: var(--glow-3); pointer-events: none; z-index: 0; animation: float3 18s ease-in-out infinite alternate; }
+    
+    @keyframes float1 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
+    @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-5%, -5%) scale(1.15); } }
+    @keyframes float3 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(3%, -4%) scale(1.05); } }
+
+    .glass-card { 
+      background: var(--card-bg); 
+      backdrop-filter: blur(24px); 
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border); 
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.15); 
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-card:hover { border-color: var(--card-border-hover); }
+    
+    .glass-nav { 
+      background: var(--nav-bg); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border); 
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .tex-list-enum { list-style-type: decimal; padding-left: 1.75rem; margin: 0.5rem 0; }
+    .tex-list-item { list-style-type: disc; padding-left: 1.75rem; margin: 0.5rem 0; }
+    .tex-list-enum li, .tex-list-item li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .tex-list-enum li::marker, .tex-list-item li::marker { color: #38bdf8; font-weight: 700; }
+    
+    .tikz-container svg { max-width: 100%; max-height: 45vh; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15)); border-radius: 12px; background: #ffffff; padding: 12px; }
+    .tikz-img-container img { max-height: 320px; width: auto; max-width: 100%; object-fit: contain; border-radius: 12px; background: #ffffff; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+
+    .mjx-chtml { outline: none !important; color: inherit !important; }
+    
+    mjx-container[display="true"], .mjx-chtml.MJXc-display {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        max-width: 100%;
+        padding-bottom: 5px;
+    }
+
+    .slide-viewport { transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out; }
+    .slide-hidden { opacity: 0; transform: scale(0.98); }
+    .slide-visible { opacity: 1; transform: scale(1); }
+    
+    button { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    button:active { transform: scale(0.96); }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.5); border-radius: 4px; }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, system-ui, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono, Consolas, monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.bottom-16{bottom:4rem}.right-0{right:0px}.right-6{right:1.5rem}.top-0{top:0px}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.mx-0\.5{margin-left:0.125rem;margin-right:0.125rem}.mx-auto{margin-left:auto;margin-right:auto}.my-0\.5{margin-top:0.125rem;margin-bottom:0.125rem}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.my-4{margin-top:1rem;margin-bottom:1rem}.mb-1{margin-bottom:0.25rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.ml-0\.5{margin-left:0.125rem}.ml-1{margin-left:0.25rem}.mr-1{margin-right:0.25rem}.mr-1\.5{margin-right:0.375rem}.mt-0\.5{margin-top:0.125rem}.mt-2{margin-top:0.5rem}.mt-6{margin-top:1.5rem}.mt-auto{margin-top:auto}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-11{height:2.75rem}.h-2{height:0.5rem}.h-7{height:1.75rem}.h-full{height:100%}.max-h-\[90vh\]{max-height:90vh}.max-h-\[92vh\]{max-height:92vh}.min-h-\[580px\]{min-height:580px}.min-h-screen{min-height:100vh}.w-0{width:0px}.w-11{width:2.75rem}.w-56{width:14rem}.w-7{width:1.75rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}.cursor-pointer{cursor:pointer}.list-decimal{list-style-type:decimal}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-\[10px\]{border-radius:10px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-amber-400\/50{border-color:rgb(251 191 36 / 0.5)}.border-amber-500\/20{border-color:rgb(245 158 11 / 0.2)}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-amber-500\/40{border-color:rgb(245 158 11 / 0.4)}.border-brand-500{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.border-brand-500\/30{border-color:rgb(99 102 241 / 0.3)}.border-cyan-500\/40{border-color:rgb(6 182 212 / 0.4)}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-emerald-500\/50{border-color:rgb(16 185 129 / 0.5)}.border-fuchsia-500\/40{border-color:rgb(217 70 239 / 0.4)}.border-indigo-500\/40{border-color:rgb(99 102 241 / 0.4)}.border-sky-400\/30{border-color:rgb(56 189 248 / 0.3)}.border-sky-500\/30{border-color:rgb(14 165 233 / 0.3)}.border-slate-500\/20{border-color:rgb(100 116 139 / 0.2)}.border-slate-500\/30{border-color:rgb(100 116 139 / 0.3)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/20{border-color:rgb(51 65 85 / 0.2)}.border-l-amber-500{--tw-border-opacity:1;border-left-color:rgb(245 158 11 / var(--tw-border-opacity, 1))}.border-l-sky-500{--tw-border-opacity:1;border-left-color:rgb(14 165 233 / var(--tw-border-opacity, 1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-amber-500\/20{background-color:rgb(245 158 11 / 0.2)}.bg-amber-600{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-brand-500\/20{background-color:rgb(99 102 241 / 0.2)}.bg-brand-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-cyan-600{--tw-bg-opacity:1;background-color:rgb(8 145 178 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-emerald-900\/40{background-color:rgb(6 78 59 / 0.4)}.bg-purple-950{--tw-bg-opacity:1;background-color:rgb(59 7 100 / var(--tw-bg-opacity, 1))}.bg-sky-500\/20{background-color:rgb(14 165 233 / 0.2)}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-500\/20{background-color:rgb(100 116 139 / 0.2)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-slate-950\/80{background-color:rgb(2 6 23 / 0.8)}.bg-slate-950\/85{background-color:rgb(2 6 23 / 0.85)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-amber-400{--tw-gradient-from:#fbbf24 var(--tw-gradient-from-position);--tw-gradient-to:rgb(251 191 36 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-brand-500{--tw-gradient-from:#6366f1 var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-brand-600{--tw-gradient-from:#4f46e5 var(--tw-gradient-from-position);--tw-gradient-to:rgb(79 70 229 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-brand-600\/20{--tw-gradient-from:rgb(79 70 229 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(79 70 229 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-sky-600{--tw-gradient-from:#0284c7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(2 132 199 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-fuchsia-500{--tw-gradient-to:rgb(217 70 239 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #d946ef var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-purple-500{--tw-gradient-to:rgb(168 85 247 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #a855f7 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-purple-600\/20{--tw-gradient-to:rgb(147 51 234 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(147 51 234 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-amber-400{--tw-gradient-to:#fbbf24 var(--tw-gradient-to-position)}.to-amber-500{--tw-gradient-to:#f59e0b var(--tw-gradient-to-position)}.to-amber-500\/20{--tw-gradient-to:rgb(245 158 11 / 0.2) var(--tw-gradient-to-position)}.to-cyan-400{--tw-gradient-to:#22d3ee var(--tw-gradient-to-position)}.to-fuchsia-500{--tw-gradient-to:#d946ef var(--tw-gradient-to-position)}.to-fuchsia-600{--tw-gradient-to:#c026d3 var(--tw-gradient-to-position)}.to-indigo-600{--tw-gradient-to:#4f46e5 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-0\.5{padding:0.125rem}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.pb-2{padding-bottom:0.5rem}.pb-4{padding-bottom:1rem}.pl-5{padding-left:1.25rem}.pr-1{padding-right:0.25rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:JetBrains Mono, Consolas, monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[7px\]{font-size:7px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.lowercase{text-transform:lowercase}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-brand-500{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.text-cyan-500{--tw-text-opacity:1;color:rgb(6 182 212 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-fuchsia-400{--tw-text-opacity:1;color:rgb(232 121 249 / var(--tw-text-opacity, 1))}.text-fuchsia-500{--tw-text-opacity:1;color:rgb(217 70 239 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-50{opacity:0.5}.opacity-60{opacity:0.6}.opacity-70{opacity:0.7}.opacity-75{opacity:0.75}.opacity-80{opacity:0.8}.opacity-90{opacity:0.9}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.duration-300{transition-duration:300ms}.selection\:bg-brand-500 *::selection{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.selection\:bg-brand-500::selection{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:border-amber-500:hover{--tw-border-opacity:1;border-color:rgb(245 158 11 / var(--tw-border-opacity, 1))}.hover\:border-brand-500\/50:hover{border-color:rgb(99 102 241 / 0.5)}.hover\:border-cyan-500:hover{--tw-border-opacity:1;border-color:rgb(6 182 212 / var(--tw-border-opacity, 1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(251 191 36 / var(--tw-bg-opacity, 1))}.hover\:bg-amber-500\/10:hover{background-color:rgb(245 158 11 / 0.1)}.hover\:bg-amber-500\/30:hover{background-color:rgb(245 158 11 / 0.3)}.hover\:bg-brand-500\/10:hover{background-color:rgb(99 102 241 / 0.1)}.hover\:bg-fuchsia-500\/10:hover{background-color:rgb(217 70 239 / 0.1)}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.hover\:opacity-100:hover{opacity:1}.focus\:border-brand-500:focus{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dark\:text-amber-300:is(.dark *){--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.dark\:text-cyan-400:is(.dark *){--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.dark\:text-emerald-300:is(.dark *){--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.dark\:text-emerald-400:is(.dark *){--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.dark\:text-fuchsia-400:is(.dark *){--tw-text-opacity:1;color:rgb(232 121 249 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:inline-block{display:inline-block}.sm\:w-48{width:12rem}.sm\:text-left{text-align:left}.sm\:text-5xl{font-size:3rem;line-height:1}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:p-5{padding:1.25rem}.md\:p-6{padding:1.5rem}.md\:p-8{padding:2rem}.md\:px-8{padding-left:2rem;padding-right:2rem}.md\:text-\[17px\]{font-size:17px}.md\:text-base{font-size:1rem;line-height:1.5rem}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}}</style><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  /* IE */ overflow: hidden;
+  /* others */ overflow: clip visible;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  /* IE */ overflow: hidden;
+  /* others */ overflow: visible clip;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+  box-sizing: border-box;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.075em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mfrac {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-frac {
+  display: inline-block;
+  vertical-align: 0.17em;
+  padding: 0 .22em;
+}
+
+mjx-frac[type="d"] {
+  vertical-align: .04em;
+}
+
+mjx-frac[delims] {
+  padding: 0 .1em;
+}
+
+mjx-frac[atop] {
+  padding: 0 .12em;
+}
+
+mjx-frac[atop][delims] {
+  padding: 0;
+}
+
+mjx-dtable {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-dtable > * {
+  font-size: 2000%;
+}
+
+mjx-dbox {
+  display: block;
+  font-size: 5%;
+}
+
+mjx-num {
+  display: block;
+  text-align: center;
+}
+
+mjx-den {
+  display: block;
+  text-align: center;
+}
+
+mjx-mfrac[bevelled] > mjx-num {
+  display: inline-block;
+}
+
+mjx-mfrac[bevelled] > mjx-den {
+  display: inline-block;
+}
+
+mjx-den[align="right"], mjx-num[align="right"] {
+  text-align: right;
+}
+
+mjx-den[align="left"], mjx-num[align="left"] {
+  text-align: left;
+}
+
+mjx-nstrut {
+  display: inline-block;
+  height: .054em;
+  width: 0;
+  vertical-align: -.054em;
+}
+
+mjx-nstrut[type="d"] {
+  height: .217em;
+  vertical-align: -.217em;
+}
+
+mjx-dstrut {
+  display: inline-block;
+  height: .505em;
+  width: 0;
+}
+
+mjx-dstrut[type="d"] {
+  height: .726em;
+}
+
+mjx-line {
+  display: block;
+  box-sizing: border-box;
+  min-height: 1px;
+  height: .06em;
+  border-top: .06em solid;
+  margin: .06em -.1em;
+  overflow: hidden;
+}
+
+mjx-line[type="d"] {
+  margin: .18em -.1em;
+}
+
+mjx-mrow {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c28::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: "(";
+}
+
+mjx-c.mjx-c1D465.TEX-I::before {
+  padding: 0.442em 0.572em 0.011em 0;
+  content: "x";
+}
+
+mjx-c.mjx-c2B::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "+";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c29::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: ")";
+}
+
+mjx-c.mjx-c2212::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "\2212";
+}
+
+mjx-c.mjx-c33::before {
+  padding: 0.665em 0.5em 0.022em 0;
+  content: "3";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+
+mjx-c.mjx-c3D::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "=";
+}
+
+mjx-c.mjx-c37::before {
+  padding: 0.676em 0.5em 0.022em 0;
+  content: "7";
+}
+
+mjx-c.mjx-c35::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "5";
+}
+
+mjx-c.mjx-c3E::before {
+  padding: 0.54em 0.778em 0.04em 0;
+  content: ">";
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+</style></head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-brand-500 selection:text-white" data-theme="pearl">
+
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-3"></div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <!-- TOP BAR -->
+    <header class="glass-nav sticky top-0 z-40 px-4 py-3 md:px-8">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        
+        <!-- Logo & Dynamic Title -->
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 via-fuchsia-500 to-amber-400 p-0.5 shadow-lg flex items-center justify-center shrink-0">
+            <div class="w-full h-full rounded-[10px] flex flex-col items-center justify-center transition-colors duration-300" style="background-color: var(--logo-bg);">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-fuchsia-500 font-black text-sm leading-none">MV</span>
+              <span class="text-[7px] theme-text-muted font-bold tracking-widest mt-0.5">MATH</span>
+            </div>
+          </div>
+          <div>
+            <h1 class="font-extrabold text-base md:text-[17px] tracking-tight flex items-center gap-2 flex-wrap">
+              <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 via-purple-500 to-amber-500 uppercase">Lớp Chuyên Toán Thầy Mẫn</span>
+              <span id="badge-app-mode" class="text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-semibold shadow-sm">KIỂM TRA, ĐÁNH GIÁ GIỮA HỌC KÌ I (2025-2026)</span>
+            </h1>
+            <p class="text-[11px] opacity-90 font-medium flex items-center gap-1.5 mt-0.5 flex-wrap">
+              <span class="text-rose-400"><i class="fa-solid fa-location-dot"></i> 27 Nguyễn Đức Cảnh</span>
+              <span class="theme-text-muted opacity-50 mx-0.5">|</span>
+              <span id="header-dept-name" class="theme-text-muted">Sở  GD&amp;ĐT thành phố Hà Nội</span>
+              <span class="theme-text-muted opacity-50 mx-0.5">-</span>
+              <span id="header-school-name" class="text-emerald-500 dark:text-emerald-400 font-bold">TRƯỜNG THCS GIẢNG VÕ</span>
+              <span id="header-subject-name" class="text-cyan-500 dark:text-cyan-400">• Môn: Toán 9</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- EXAM TIMER -->
+        <div id="exam-timer-box" class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl border shadow-inner transition-colors duration-300" style="background-color: var(--timer-bg); border-color: var(--timer-border);">
+          <i class="fa-solid fa-stopwatch text-amber-500 text-sm animate-bounce"></i>
+          <div class="flex flex-col text-left">
+            <span class="text-[9px] uppercase font-bold theme-text-muted tracking-wider">Thời gian còn lại</span>
+            <span id="timer-display" class="font-mono text-sm font-extrabold text-amber-500 leading-tight">45:00</span>
+          </div>
+          <button id="btn-start-timer" onclick="app.startTimerManual()" class="ml-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow cursor-pointer">Bắt đầu</button>
+        </div>
+
+        <!-- Action Buttons & Theme Selector -->
+        <div class="flex items-center gap-2 flex-wrap">
+          
+          <button onclick="app.openTikzSyncModal()" class="teacher-only px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-sky-600 to-indigo-600 text-white border border-sky-400/30 shadow-md active:scale-95 transition-all">
+            <i class="fa-solid fa-bolt text-amber-300 mr-1"></i> TikZ CDN Sync
+          </button>
+
+          <!-- 3-THEME DROPDOWN SELECTOR -->
+          <div class="relative" id="theme-dropdown-wrapper">
+            <button id="btn-theme-selector" onclick="app.toggleThemeMenu()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold glass-card hover:border-brand-500/50 active:scale-95 transition-all cursor-pointer shadow-md">
+              <span id="current-theme-icon" class="text-indigo-400"><i class="fa-solid fa-sun text-amber-500"></i></span>
+              <span id="current-theme-name" class="hidden sm:inline-block font-semibold">Ngọc Trai</span>
+              <i class="fa-solid fa-chevron-down text-[10px] opacity-60 ml-0.5"></i>
+            </button>
+            
+            <div id="theme-menu" class="hidden absolute right-0 mt-2 w-56 glass-card rounded-2xl p-2 shadow-2xl z-50 border backdrop-blur-xl transition-all duration-200" style="background-color: var(--dropdown-bg); border-color: var(--card-border);">
+              <div class="text-[10px] font-extrabold uppercase px-2.5 py-1.5 theme-text-muted tracking-wider border-b border-slate-700/20 mb-1 flex items-center justify-between">
+                <span><i class="fa-solid fa-palette mr-1.5 text-brand-500"></i>Chọn Giao Diện</span>
+                <span class="text-[9px] lowercase font-normal opacity-70">3 Chế độ</span>
+              </div>
+              
+              <button onclick="app.setTheme('cyber')" id="theme-opt-cyber" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all hover:bg-brand-500/10 text-left my-0.5 group">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-lg bg-slate-950 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xs shadow-sm"><i class="fa-solid fa-moon"></i></div>
+                  <div><div class="font-bold">Bóng Đêm Cyber</div><div class="text-[9px] theme-text-muted">Deep Slate &amp; Neon</div></div>
+                </div>
+                <i class="fa-solid fa-check text-xs text-brand-500 theme-check hidden"></i>
+              </button>
+
+              <button onclick="app.setTheme('aurora')" id="theme-opt-aurora" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all hover:bg-fuchsia-500/10 text-left my-0.5 group">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-lg bg-purple-950 border border-fuchsia-500/40 flex items-center justify-center text-fuchsia-400 text-xs shadow-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                  <div><div class="font-bold">Cực Quang Aurora</div><div class="text-[9px] theme-text-muted">Royal Purple &amp; Magenta</div></div>
+                </div>
+                <i class="fa-solid fa-check text-xs text-fuchsia-500 theme-check hidden"></i>
+              </button>
+
+              <button onclick="app.setTheme('pearl')" id="theme-opt-pearl" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all hover:bg-amber-500/10 text-left my-0.5 group">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-lg bg-slate-100 border border-amber-400/50 flex items-center justify-center text-amber-500 text-xs shadow-sm"><i class="fa-solid fa-sun"></i></div>
+                  <div><div class="font-bold text-slate-800">Ngọc Trai Sang Trọng</div><div class="text-[9px] text-slate-500">Pearl Light Luxury</div></div>
+                </div>
+                <i class="fa-solid fa-check text-xs text-amber-500 theme-check"></i>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="app.showScoreModal()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-600 dark:text-amber-300 border border-amber-500/40 shadow-md active:scale-95 transition-all">
+            <i class="fa-solid fa-award text-amber-500 text-sm mr-1"></i> Nộp Bài / Báo Điểm
+          </button>
+          <button id="btn-import" onclick="app.openImportModal()" class="teacher-only px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-brand-600 to-fuchsia-600 text-white border border-brand-400/30 shadow-md active:scale-95 transition-all">
+            <i class="fa-solid fa-file-import mr-1"></i> Nạp Đề
+          </button>
+          <button id="btn-toggle-solution" onclick="app.handleToggleSolution()" class="px-3 py-1.5 rounded-xl text-xs font-medium glass-card text-amber-500 active:scale-95 transition-all">
+            <i id="sol-icon" class="fa-solid fa-eye-slash text-amber-500 mr-1"></i> <span id="sol-btn-text">Đóng lời giải</span>
+          </button>
+          <button id="btn-export" onclick="app.openExportModal()" class="teacher-only px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 border border-emerald-500/50 shadow-lg active:scale-95 transition-all">
+            <i class="fa-solid fa-download mr-1"></i> Xuất HTML
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CANVAS -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-3 md:p-6 flex flex-col justify-center">
+      <div id="presentation-frame" class="glass-card rounded-2xl p-4 md:p-8 relative overflow-hidden transition-all duration-300 flex flex-col min-h-[580px] justify-between">
+        <div id="slide-viewport" class="slide-viewport slide-visible flex-1 flex flex-col justify-between">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-500/20">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="badge-question-num" class="px-3 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-brand-600 to-fuchsia-600 text-white shadow-md">Câu 4</span>
+              <span id="badge-type" class="px-2.5 py-1 rounded-lg text-xs font-medium theme-box text-fuchsia-500 dark:text-fuchsia-400">Trắc nghiệm 4 lựa chọn</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-2 items-start flex-1">
+            <div id="problem-column" class="lg:col-span-7 flex flex-col gap-4">
+              <h2 id="slide-title" class="text-lg md:text-xl font-bold tracking-tight leading-snug">Câu 4</h2>
+              <div id="slide-question-body" class="text-sm md:text-base leading-relaxed space-y-3 theme-box p-4 rounded-xl">Cho <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="92" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-n"><mjx-c class="mjx-c25B3"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">△</mi><mi>A</mi><mi>B</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container> vuông tại <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="93" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></mjx-assistive-mml></mjx-container> <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="94" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>A</mi><mi>B</mi><mo>&lt;</mo><mi>A</mi><mi>C</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container>, đường cao <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="95" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>H</mi></math></mjx-assistive-mml></mjx-container>.
+		<ol class="tex-list-enum"><li>Biết <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="96" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-n"><mjx-c class="mjx-c74"></mjx-c><mjx-c class="mjx-c61"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-texatom space="2" texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.135em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mstyle space="4"><mjx-mfrac><mjx-frac type="d"><mjx-num><mjx-nstrut type="d"></mjx-nstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c></mjx-mn></mjx-num><mjx-dbox><mjx-dtable><mjx-line type="d"></mjx-line><mjx-row><mjx-den><mjx-dstrut type="d"></mjx-dstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac></mjx-mstyle></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>tan</mi><mo data-mjx-texclass="NONE">⁡</mo><mrow data-mjx-texclass="ORD"><mover><mrow><mi>A</mi><mi>C</mi><mi>B</mi></mrow><mo>^</mo></mover></mrow><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>3</mn><mn>4</mn></mfrac></mstyle></math></mjx-assistive-mml></mjx-container> và <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="97" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>B</mi><mo>=</mo><mn>6</mn></math></mjx-assistive-mml></mjx-container> cm tính độ dài <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="98" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container>, <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="99" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>H</mi></math></mjx-assistive-mml></mjx-container> và số đo <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="100" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.135em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mover><mrow><mi>A</mi><mi>C</mi><mi>B</mi></mrow><mo>^</mo></mover></mrow></math></mjx-assistive-mml></mjx-container>. (Các số đo độ dài làm tròn đến hàng phần mười, số đo góc làm tròn đến hàng đơn vị)</li><li>Kẻ đường thẳng qua điểm <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="101" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math></mjx-assistive-mml></mjx-container> vuông góc với đường thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="102" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container>, cắt đường thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="103" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container> tại điểm <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="104" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>D</mi></math></mjx-assistive-mml></mjx-container>. Qua điểm <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="105" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></mjx-assistive-mml></mjx-container> kẻ đường thẳng song song với đường thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="106" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container> cắt đường thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="107" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>D</mi><mi>B</mi></math></mjx-assistive-mml></mjx-container> tại điểm <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="108" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi></math></mjx-assistive-mml></mjx-container>. Chứng minh <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="109" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D434 TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-texatom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>K</mi><mo>⋅</mo><mi>B</mi><mi>D</mi><mo>=</mo><mi>A</mi><msup><mi>B</mi><mrow data-mjx-texclass="ORD"><mn>2</mn></mrow></msup></math></mjx-assistive-mml></mjx-container> và <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="110" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.268em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-texatom space="4" texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.173em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mover><mrow><mi>B</mi><mi>K</mi><mi>H</mi></mrow><mo>^</mo></mover></mrow><mo>=</mo><mrow data-mjx-texclass="ORD"><mover><mrow><mi>B</mi><mi>C</mi><mi>D</mi></mrow><mo>^</mo></mover></mrow></math></mjx-assistive-mml></mjx-container>.</li><li>Gọi <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="111" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D440 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi></math></mjx-assistive-mml></mjx-container> là trung điểm của đoạn thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="112" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>D</mi><mi>C</mi></math></mjx-assistive-mml></mjx-container>, <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="113" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43C TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>I</mi></math></mjx-assistive-mml></mjx-container> là giao điểm của hai đường thẳng <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="114" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D440 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>M</mi></math></mjx-assistive-mml></mjx-container> và <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="115" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi><mi>H</mi></math></mjx-assistive-mml></mjx-container>. Chứng minh <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="116" style="font-size: 123.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-texatom space="2" texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.268em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-texatom space="2" texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 1.268em; margin-bottom: -0.561em;"><mjx-mo class="mjx-s4" style="width: 0px; margin-left: -0.951em;"><mjx-c class="mjx-c2C6 TEX-S4"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-base></mjx-mover></mjx-texatom><mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-script style="vertical-align: 0.363em;"><mjx-texatom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mstyle space="4"><mjx-mfrac><mjx-frac type="d"><mjx-num><mjx-nstrut type="d"></mjx-nstrut><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D435 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43C TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-num><mjx-dbox><mjx-dtable><mjx-line type="d"></mjx-line><mjx-row><mjx-den><mjx-dstrut type="d"></mjx-dstrut><mjx-mrow><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D437 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi></mjx-mrow></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac></mjx-mstyle></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mrow data-mjx-texclass="ORD"><mover><mrow><mi>B</mi><mi>K</mi><mi>H</mi></mrow><mo>^</mo></mover></mrow><mo>⋅</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mrow data-mjx-texclass="ORD"><mover><mrow><mi>B</mi><mi>K</mi><mi>H</mi></mrow><mo>^</mo></mover></mrow><msup><mo stretchy="false">)</mo><mrow data-mjx-texclass="ORD"><mn>2</mn></mrow></msup><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>B</mi><mi>I</mi></mrow><mrow><mi>D</mi><mi>C</mi></mrow></mfrac></mstyle></math></mjx-assistive-mml></mjx-container></li></ol></div>
+            </div>
+            <div id="interactive-column" class="lg:col-span-5 flex flex-col gap-4 theme-box p-4 md:p-5 rounded-xl">
+              <h3 class="text-xs font-bold uppercase tracking-wider opacity-75 flex items-center gap-2 pb-2 border-b border-slate-500/20">
+                <i class="fa-solid fa-circle-check text-brand-500"></i> Phần tương tác
+              </h3>
+              <div id="interactive-content" class="space-y-3 flex-1 flex flex-col justify-center"><div class="grid grid-cols-1 gap-2.5"></div></div>
+            </div>
+          </div>
+          <div id="solution-drawer" class="transition-all duration-300 mt-6 pt-4 border-t p-5 rounded-xl border-l-4 border-l-amber-500 shadow-xl" style="background-color: var(--solution-bg); border-color: var(--solution-border);">
+            <h3 class="text-sm font-bold text-amber-500 flex items-center gap-2 mb-3 pb-2 border-b border-amber-500/20"><i class="fa-solid fa-lightbulb"></i> Lời giải chi tiết</h3>
+            <div id="slide-solution-body" class="text-sm leading-relaxed space-y-3">% Không có lời giải trong bản gốc</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER NAV -->
+    <footer class="glass-nav py-3 px-4 md:px-8 mt-auto">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button onclick="app.prevSlide()" class="px-4 py-2 rounded-xl text-xs font-semibold theme-box shadow-md transition-all active:scale-95"><i class="fa-solid fa-arrow-left"></i> Trước</button>
+          <button onclick="app.nextSlide()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white border border-brand-500 shadow-md transition-all active:scale-95">Tiếp theo <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="w-full sm:w-48 bg-slate-500/20 rounded-full h-2 overflow-hidden border border-slate-500/30">
+          <div id="presentation-progress" class="bg-gradient-to-r from-brand-500 via-fuchsia-500 to-cyan-400 h-full w-0 transition-all duration-300" style="width: 80%;"></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL: TIKZ SYNC -->
+  <div id="modal-tikz-sync" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-3xl w-full rounded-2xl p-6 flex flex-col max-h-[92vh] shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-500/20">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30">
+            <i class="fa-solid fa-terminal text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base">Cập Nhật Ứng Dụng TikZ Sync CDN (Terminal 1-Click)</h3>
+            <p class="text-[11px] theme-text-muted">Biên dịch TikZ thành ảnh PNG sắc nét &amp; tự động đẩy lên CDN GitHub 0s delay</p>
+          </div>
+        </div>
+        <button onclick="app.closeTikzSyncModal()" class="opacity-70 hover:opacity-100 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <div class="my-4 space-y-4 text-xs overflow-y-auto pr-1">
+        <div class="p-4 rounded-xl theme-box space-y-2 border-l-4 border-l-sky-500">
+          <p class="font-bold text-sky-400">📌 Hướng dẫn sử dụng Terminal 1 Lệnh duy nhất:</p>
+          <ol class="list-decimal pl-5 space-y-1 opacity-90 leading-relaxed">
+            <li>Mở ứng dụng <strong>Terminal</strong> trên macOS.</li>
+            <li>Sao chép toàn bộ khối lệnh bên dưới và dán vào Terminal, sau đó nhấn <kbd class="px-1.5 py-0.5 bg-slate-800 rounded border border-slate-700">Enter</kbd>.</li>
+            <li>Ứng dụng Python GUI sẽ khởi động. Chọn file <code class="text-amber-400">.tex</code> cần xử lý và nhấn <strong>Bắt đầu biên dịch</strong>.</li>
+            <li>File kết quả <code class="text-emerald-400">_DaChuanHoa.tex</code> sẽ được nạp trực tiếp vào ứng dụng web này!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-500/20 flex justify-end">
+        <button onclick="app.closeTikzSyncModal()" class="px-5 py-2 text-xs font-bold bg-slate-700 hover:bg-slate-600 text-white rounded-xl">Đóng Bảng Điều Khiển</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS: SCORE, IMPORT, EXPORT -->
+  <div id="modal-score" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-2xl w-full rounded-2xl p-6 flex flex-col max-h-[90vh] shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-500/20">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-amber-500/20 text-amber-500 border border-amber-500/30"><i class="fa-solid fa-trophy text-2xl"></i></div>
+          <div><h3 class="font-extrabold text-base">Kết Quả Bài Làm</h3></div>
+        </div>
+        <button onclick="app.closeScoreModal()" class="opacity-70 hover:opacity-100 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="my-4 space-y-4 overflow-y-auto flex-1 pr-1">
+        <div class="p-6 rounded-2xl bg-gradient-to-r from-brand-600/20 via-purple-600/20 to-amber-500/20 border border-amber-500/30 text-center sm:text-left">
+          <span class="text-xs font-bold uppercase text-amber-500 block mb-1">Điểm Số Của Bạn</span>
+          <div class="text-4xl sm:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-fuchsia-500">
+            <span id="score-val">0.0</span> <span class="text-lg font-bold theme-text-muted">/ 10.0</span>
+          </div>
+          <p id="score-feedback" class="text-xs font-semibold mt-2 text-emerald-500 dark:text-emerald-400">Đang tính toán...</p>
+        </div>
+        <div id="score-breakdown-list" class="space-y-2"></div>
+      </div>
+      <div class="pt-3 border-t border-slate-500/20 flex justify-end">
+        <button onclick="app.closeScoreModal()" class="px-5 py-2 text-xs font-bold bg-brand-600 text-white rounded-xl">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-import" class="teacher-only fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-card max-w-4xl w-full rounded-2xl p-6 flex flex-col max-h-[92vh] shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-500/20">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-brand-500/20 text-brand-500 border border-brand-500/30"><i class="fa-solid fa-file-code text-xl"></i></div>
+          <div><h3 class="font-bold text-base">Nạp Đề LaTeX (Chuẩn ex_test hoặc file _DaChuanHoa.tex)</h3></div>
+        </div>
+        <button onclick="app.closeImportModal()" class="opacity-70 hover:opacity-100 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="my-4 flex-1">
+        <textarea id="import-tex-input" rows="15" class="w-full theme-input font-mono text-xs rounded-xl p-3 focus:border-brand-500 focus:outline-none" placeholder="Dán mã LaTeX có chứa \begin{dethi}...\end{dethi} hoặc mã TeX đã qua xử lý TikZ CDN"></textarea>
+      </div>
+      <div class="pt-4 border-t border-slate-500/20 flex justify-end gap-2">
+        <button onclick="app.processImportedTeX()" class="px-5 py-2 text-xs font-bold bg-brand-600 text-white rounded-xl">Phân Tích &amp; Nạp Slide</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-export" class="teacher-only fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-card max-w-2xl w-full rounded-2xl p-6 flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-500/20">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-emerald-500/20 text-emerald-500 border border-emerald-500/30"><i class="fa-solid fa-file-export text-xl"></i></div>
+          <div><h3 class="font-bold text-base">Xuất Bản File HTML Thi Trực Tuyến</h3></div>
+        </div>
+        <button onclick="app.closeExportModal()" class="opacity-70 hover:opacity-100 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="my-4 space-y-4 text-xs">
+        <div class="p-4 rounded-xl theme-box space-y-3">
+          <label class="block font-semibold mb-1 opacity-80">Thời gian thi (Phút):</label>
+          <input type="number" id="export-cfg-timer" value="45" class="w-full theme-input rounded-lg p-2 focus:border-brand-500">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div onclick="app.exportHTML('student')" class="p-4 rounded-2xl border border-cyan-500/40 theme-box cursor-pointer flex flex-col group hover:border-cyan-500 transition-all">
+            <h4 class="font-bold text-sm text-cyan-500 mb-1">Bản Học Sinh (Mở khóa)</h4>
+            <p class="text-[11px] theme-text-muted mb-3">Cho phép xem lời giải tự do.</p>
+            <button class="mt-auto w-full py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white">Tải Bản Học Sinh</button>
+          </div>
+          <div onclick="app.exportHTML('teacher')" class="p-4 rounded-2xl border border-amber-500/40 theme-box cursor-pointer flex flex-col group hover:border-amber-500 transition-all">
+            <h4 class="font-bold text-sm text-amber-500 mb-1">Bản Giáo Viên (Đầy đủ)</h4>
+            <p class="text-[11px] theme-text-muted mb-3">Không giới hạn tính năng.</p>
+            <button class="mt-auto w-full py-2 rounded-xl text-xs font-bold bg-amber-600 text-white">Tải Bản Giáo Viên</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="fixed bottom-16 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <script id="student-mode-flag">
+          window.IS_STUDENT_MODE = true; 
+          window.PRELOADED_EXAM_INFO = {"department":"Sở  GD&ĐT thành phố Hà Nội","school":"Trường THCS GIẢNG VÕ","examName":"KIỂM TRA, ĐÁNH GIÁ GIỮA HỌC KÌ I","year":"2025-2026","subject":"Toán 9"}; 
+          window.PRELOADED_SLIDES = [{"id":1,"title":"Câu 1","type":"MCQ","question":"Giải các phương trình, bất phương trình sau:\n\t\t\u003col class=\"tex-list-enum\">\u003cli>$(x+2)^{2}-x(x-3)+10=0$\u003c/li>\u003cli>$(3x-1)^{2}-(x+3)(3x-1)=0$ % Ký hiệu \\pi trong bản gốc được điều chỉnh thành x theo văn cảnh môn Toán\u003c/li>\u003cli>$\\dfrac{2x}{x+1}+\\dfrac{7x^{2}-3x}{x^{2}-1}=\\dfrac{3x-1}{x-1}$\u003c/li>\u003cli>$\\dfrac{x-3}{5}+x&gt;\\dfrac{4x-2}{4}-1$\u003c/li>\u003c/ol>","options":[],"correctIndex":0,"tfItems":[],"correctAnswer":"","solution":"% Không có lời giải trong bản gốc"},{"id":2,"title":"Câu 2","type":"MCQ","question":"\u003col class=\"tex-list-enum\">\u003cli>Hai lớp $9$A và $9$B có tổng số $93$ học sinh. Hưởng ứng phong trào \"Kế hoạch nhỏ\", mỗi học sinh lớp $9$A thu gom được trung bình $3$ kg giấy vụn, mỗi học sinh lớp $9$B thu gom được trung bình $2$ kg giấy vụn. Kết thúc đợt, cả hai lớp đã thu gom được tổng cộng $231$ kg giấy vụn. Hỏi mỗi lớp có bao nhiêu học sinh?\u003c/li>\u003cli>Trong một kỳ kiểm tra bắn đạn thật, mỗi học viên phải thực hiện $4$ lượt bắn. Anh Minh đã thu được kết quả sau ba lượt bắn với số điểm như sau: lượt $1$ đạt $9,5$ điểm, lượt $2$ đạt $7,5$ điểm, lượt $3$ đạt $8,0$ điểm. Theo quy định, muốn vượt qua được kỳ kiểm tra thì học viên phải có điểm trung bình của các lượt bắn lớn hơn hoặc bằng $8,5$. Biết số điểm lượt $1$ và $2$ tính hệ số $1$, số điểm lượt $3$ và $4$ được tính hệ số $2$. Hãy cho biết anh Minh phải đạt ít nhất bao nhiêu điểm trong lượt bắn cuối cùng để vượt qua được kỳ kiểm tra nói trên?\u003c/li>\u003c/ol>","options":[],"correctIndex":0,"tfItems":[],"correctAnswer":"","solution":"% Không có lời giải trong bản gốc"},{"id":3,"title":"Câu 3","type":"MCQ","question":"Trong một buổi khảo sát đại dương, một robot lặn tự hành bắt đầu rời khỏi tàu mẹ tại điểm $C$ trên mặt nước và di chuyển theo đường thẳng nghiêng góc $40^{\\circ}$ so với mặt nước (như hình vẽ). Khi robot lặn đến độ sâu $AB=150$ m so với mặt nước, nó dừng lại để thu thập dữ liệu tại điểm $B$.\n\t\t\u003cdiv class=\"w-full flex justify-center my-4 overflow-x-auto\">\n\t\t\t\u003cdiv class=\"tikz-img-container\" style=\"text-align: center; margin: 12px 0; width: 100%;\">\u003cimg src=\"https://raw.githubusercontent.com/voquangman/voquangman.github.io/main/resource/9GHK1-GiangVo-HaNoi2025-2026-hinh_20261029152156-1.png\" alt=\"Hình 1\" style=\"max-height: 280px; width: auto; max-width: 95%; height: auto; border-radius: 10px; background: #ffffff; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: inline-block; object-fit: contain;\" />\u003c/div>\n\t\t\u003c/div>\n\t\t\u003col class=\"tex-list-enum\">\u003cli>Tính quãng đường $CB$ mà robot đã di chuyển (kết quả làm tròn đến hàng đơn vị).\u003c/li>\u003cli>Biết vận tốc trung bình của robot là $10$ m/s Tính thời gian để robot đi chuyển hết quãng đường $CB$ (làm tròn đến giây).\u003c/li>\u003c/ol>","options":[],"correctIndex":0,"tfItems":[],"correctAnswer":"","solution":"% Không có lời giải trong bản gốc"},{"id":4,"title":"Câu 4","type":"MCQ","question":"Cho $\\triangle ABC$ vuông tại $A$ $(AB&lt;AC)$, đường cao $AH$.\n\t\t\u003col class=\"tex-list-enum\">\u003cli>Biết $\\tan \\widehat{ACB}=\\dfrac{3}{4}$ và $AB=6$ cm tính độ dài $BC$, $AH$ và số đo $\\widehat{ACB}$. (Các số đo độ dài làm tròn đến hàng phần mười, số đo góc làm tròn đến hàng đơn vị)\u003c/li>\u003cli>Kẻ đường thẳng qua điểm $B$ vuông góc với đường thẳng $BC$, cắt đường thẳng $AC$ tại điểm $D$. Qua điểm $A$ kẻ đường thẳng song song với đường thẳng $BC$ cắt đường thẳng $DB$ tại điểm $K$. Chứng minh $BK \\cdot BD=AB^{2}$ và $\\widehat{BKH}=\\widehat{BCD}$.\u003c/li>\u003cli>Gọi $M$ là trung điểm của đoạn thẳng $DC$, $I$ là giao điểm của hai đường thẳng $BM$ và $KH$. Chứng minh $(\\sin\\widehat{BKH} \\cdot \\cos\\widehat{BKH})^{2}=\\dfrac{BI}{DC}$\u003c/li>\u003c/ol>","options":[],"correctIndex":0,"tfItems":[],"correctAnswer":"","solution":"% Không có lời giải trong bản gốc"},{"id":5,"title":"Câu 5","type":"MCQ","question":"Một cửa hàng bán cơm hộp văn phòng có $3$ loại sản phẩm: cơm gà, cơm bò và cơm cá. Cửa hàng có các thông tin như sau:\n\t\t\u003cul class=\"tex-list-item\">\u003cli>Chi phí nguyên liệu cho mỗi loại cơm gà, cơm bò, cơm cá lần lượt là $25000$ đồng, $35000$ đồng và $20000$ đồng\u003c/li>\u003cli>Điều kiện về số lượng hộp cơm làm ra là số hộp cơm gà lớn hơn $50$ hộp, số hộp cơm bò và số hộp cơm cá đều không ít hơn $40$ hộp.\u003c/li>\u003cli>Tổng chi phí nguyên liệu trong ngày không vượt quá $3500000$ đồng.\u003c/li>\u003cli>Lợi nhuận thu được trên mỗi hộp cơm gà, cơm bò, cơm cá lần lượt là $8000$ đồng/hộp, $10000$ đồng/hộp và $6000$ đồng/hộp.\u003c/li>\u003c/ul>\n\t\tGiả sử tất cả số hộp cơm làm ra đều được bán hết trong ngày. Hỏi cửa hàng nên nấu bao nhiêu hộp cơm mỗi loại để lợi nhuận thu được là cao nhất?","options":[],"correctIndex":0,"tfItems":[],"correctAnswer":"","solution":"Gọi số hộp cơm gà, cơm bò và cơm cá mà cửa hàng cần nấu lần lượt là $x,y,z$ (hộp). \u003cbr/>\n\tĐiều kiện: $x,y,z\\in\\mathbb N^*$\n\tTheo đề bài, ta có các điều kiện sau:\n\t\u003cul class=\"tex-list-item\">\u003cli>Số lượng mỗi loại: $x &gt; 50 \\implies x \\ge 51$; $y \\ge 40$; $z \\ge 40$.\u003c/li>\u003cli>Tổng chi phí không vượt quá $3500000$ đồng: \n\t\t$$25000x + 35000y + 20000z \\le 3500000 \\iff 5x + 7y + 4z \\le 700 \\quad (1)$$\u003c/li>\u003c/ul>\n\t\n\tTổng lợi nhuận thu được trong ngày là:\n\t$$L = 8000x + 10000y + 6000z \\text{ (đồng)}$$\n\t\n\tTừ $(1)$, ta suy ra $5x \\le 700 - 7y - 4z \\implies x \\le 140 - 1{,}4y - 0{,}8z$. \u003cbr/>\n\tThay vào biểu thức tính lợi nhuận $L$, ta có:\n\t$$\\begin{aligned} \t\t\tL &= 1000 \\cdot (8x + 10y + 6z) \u003cbr/> \t\t\t&\\le 1000 \\cdot \\left[ 8(140 - 1{,}4y - 0{,}8z) + 10y + 6z \\right] \u003cbr/> \t\t\t&= 1000 \\cdot (1120 - 11{,}2y - 6{,}4z + 10y + 6z) \u003cbr/> \t\t\t&= 1000 \\cdot (1120 - 1{,}2y - 0{,}4z) \t\t\\end{aligned}$$\n\t\n\tDo $y \\ge 40$ và $z \\ge 40$ nên:\n\t$$L \\le 1000 \\cdot (1120 - 1{,}2 \\cdot 40 - 0{,}4 \\cdot 40) = 1000 \\cdot (1120 - 48 - 16) = 1056000$$\n\t\n\tVậy lợi nhuận lớn nhất có thể đạt được là $1056000$ đồng. \u003cbr/>\n\tDấu \"=\" (lợi nhuận lớn nhất) xảy ra khi và chỉ khi:\n\t$$\\begin{cases} \t\t\ty = 40 \u003cbr/> \t\t\tz = 40 \u003cbr/> \t\t\t5x + 7y + 4z = 700 \t\t\\end{cases} \t\t\\implies \t\t\\begin{cases} \t\t\ty = 40 \u003cbr/> \t\t\tz = 40 \u003cbr/> \t\t\t5x + 7(40) + 4(40) = 700 \t\t\\end{cases} \t\t\\implies \t\t\\begin{cases} \t\t\tx = 52 \\text{ (thỏa mãn } x &gt; 50\\text{)} \u003cbr/> \t\t\ty = 40 \\text{ (thỏa mãn)} \u003cbr/> \t\t\tz = 40 \\text{ (thỏa mãn)} \t\t\\end{cases}$$\n\t\n\tVậy cửa hàng nên nấu $52$ hộp cơm gà, $40$ hộp cơm bò và $40$ hộp cơm cá để đạt được mức lợi nhuận cao nhất."}];
+          window.PRELOADED_EXAM_CFG = { timerMinutes: 120 };
+        </script>
+
+  <!-- APP ENGINE -->
+  <script>
+    class LaTeXPresenterApp {
+      constructor() {
+        this.slides = [];
+        this.currentIndex = 0;
+        this.showSolution = false;
+        this.userAnswers = {};
+        this.isStudentMode = false;
+        this.examInfo = null;
+        this.currentTheme = 'cyber';
+
+        this.timerMinutes = 45;
+        this.timerSecondsLeft = 45 * 60;
+        this.timerInterval = null;
+        this.isTimerRunning = false;
+        this.isExamLocked = false;
+
+        this.rawSampleTeX = `\\begin{dethi}
+	{Sở GD\\&ĐT thành phố Hà Nội}%
+	{Trường THCS GIẢNG VÕ}%
+	{KIỂM TRA, ĐÁNH GIÁ GIỮA HỌC KÌ I}%
+	%{$2024-2025$}%
+	%{Toán 9}%
+\\end{dethi}
+
+\\setcounter{subsection}{0}
+\\setcounter{ex}{0}
+
+\\begin{ex}%[Đề kiểm tra giữa học kì I Toán 9 năm học 2025-2026 - THCS Giảng Võ (3,0 điểm)]
+	Giải các phương trình, bất phương trình sau:
+	\\begin{enumerate}
+		\\item $(x+2)^{2}-x(x-3)+10=0$
+		\\item $(3x-1)^{2}-(x+3)(3x-1)=0$
+		\\item $\\dfrac{2x}{x+1}+\\dfrac{7x^{2}-3x}{x^{2}-1}=\\dfrac{3x-1}{x-1}$
+		\\item $\\dfrac{x-3}{5}+x>\\dfrac{4x-2}{4}-1$
+	\\end{enumerate}
+	\\loigiai{}
+\\end{ex}
+
+\\begin{ex}%[Đề kiểm tra giữa học kì I Toán 9 năm học 2025-2026 - THCS Giảng Võ (2,5 điểm)]
+	\\begin{enumerate}
+		\\item Hai lớp $9$A và $9$B có tổng số $93$ học sinh. Hưởng ứng phong trào "Kế hoạch nhỏ", mỗi học sinh lớp $9$A thu gom được trung bình $3$ kg giấy vụn, mỗi học sinh lớp $9$B thu gom được trung bình $2$ kg giấy vụn. Kết thúc đợt, cả hai lớp đã thu gom được tổng cộng $231$ kg giấy vụn. Hỏi mỗi lớp có bao nhiêu học sinh?
+		\\item Trong một kỳ kiểm tra bắn đạn thật, mỗi học viên phải thực hiện $4$ lượt bắn. Anh Minh đã thu được kết quả sau ba lượt bắn với số điểm như sau: lượt $1$ đạt $9,5$ điểm, lượt $2$ đạt $7,5$ điểm, lượt $3$ đạt $8,0$ điểm. Theo quy định, muốn vượt qua được kỳ kiểm tra thì học viên phải có điểm trung bình của các lượt bắn lớn hơn hoặc bằng $8,5$. Biết số điểm lượt $1$ và $2$ tính hệ số $1$, số điểm lượt $3$ và $4$ được tính hệ số $2$. Hãy cho biết anh Minh phải đạt ít nhất bao nhiêu điểm trong lượt bắn cuối cùng để vượt qua được kỳ kiểm tra nói trên?
+	\\end{enumerate}
+	\\loigiai{}
+\\end{ex}
+
+\\begin{ex}%[Đề kiểm tra giữa học kì I Toán 9 năm học 2025-2026 - THCS Giảng Võ (1,0 điểm)]
+	Trong một buổi khảo sát đại dương, một robot lặn tự hành bắt đầu rời khỏi tàu mẹ tại điểm $C$ trên mặt nước và di chuyển theo đường thẳng nghiêng góc $40^{\\circ}$ so với mặt nước. Khi robot lặn đến độ sâu $AB=150$ m so với mặt nước, nó dừng lại để thu thập dữ liệu tại điểm $B$.
+	\\begin{center}
+		<div class="tikz-img-container" style="text-align: center; margin: 12px 0; width: 100%;"><img src="https://raw.githubusercontent.com/voquangman/voquangman.github.io/main/resource/9GHK1-GiangVo-HaNoi2025-2026-hinh_20261029151406-1.png" alt="Hình 1" style="max-height: 280px; width: auto; max-width: 95%; height: auto; border-radius: 10px; background: #ffffff; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: inline-block; object-fit: contain;" /></div>
+	\\end{center}
+	\\begin{enumerate}
+		\\item Tính quãng đường $CB$ mà robot đã di chuyển (kết quả làm tròn đến hàng đơn vị).
+		\\item Biết vận tốc trung bình của robot là $10$ m/s Tính thời gian để robot đi chuyển hết quãng đường $CB$ (làm tròn đến giây).
+	\\end{enumerate}
+	\\loigiai{}
+\\end{ex}
+
+\\begin{ex}%[Đề kiểm tra giữa học kì I Toán 9 năm học 2025-2026 - THCS Giảng Võ (3,0 điểm)]
+	Cho $\\triangle ABC$ vuông tại $A$ $(AB<AC)$, đường cao $AH$.
+	\\begin{enumerate}
+		\\item Biết $\\tan \\widehat{ACB}=\\dfrac{3}{4}$ và $AB=6$ cm tính độ dài $BC$, $AH$ và số đo $\\widehat{ACB}$. (Các số đo độ dài làm tròn đến hàng phần mười, số đo góc làm tròn đến hàng đơn vị)
+		\\item Kẻ đường thẳng qua điểm $B$ vuông góc với đường thẳng $BC$, cắt đường thẳng $AC$ tại điểm $D$. Qua điểm $A$ kẻ đường thẳng song song với đường thẳng $BC$ cắt đường thẳng $DB$ tại điểm $K$. Chứng minh $BK \\cdot BD=AB^{2}$ và $\\widehat{BKH}=\\widehat{BCD}$.
+		\\item Gọi $M$ là trung điểm của đoạn thẳng $DC$, $I$ là giao điểm của hai đường thẳng $BM$ và $KH$. Chứng minh $(\\sin\\widehat{BKH} \\cdot \\cos\\widehat{BKH})^{2}=\\dfrac{BI}{DC}$
+	\\end{enumerate}
+	\\loigiai{}
+\\end{ex}
+
+\\begin{ex}%[Đề kiểm tra giữa học kì I Toán 9 năm học 2025-2026 - THCS Giảng Võ (0,5 điểm)]
+	Một cửa hàng bán cơm hộp văn phòng có $3$ loại sản phẩm: cơm gà, cơm bò và cơm cá. Cửa hàng có các thông tin như sau:
+	\\begin{itemize}
+		\\item Chi phí nguyên liệu cho mỗi loại cơm gà, cơm bò, cơm cá lần lượt là $25000$ đồng, $35000$ đồng và $20000$ đồng
+		\\item Điều kiện về số lượng hộp cơm làm ra là số hộp cơm gà lớn hơn $50$ hộp, số hộp cơm bò và số hộp cơm cá đều không ít hơn $40$ hộp.
+		\\item Tổng chi phí nguyên liệu trong ngày không vượt quá $3500000$ đồng.
+		\\item Lợi nhuận thu được trên mỗi hộp cơm gà, cơm bò, cơm cá lần lượt là $8000$ đồng/hộp, $10000$ đồng/hộp và $6000$ đồng/hộp.
+	\\end{itemize}
+	Giả sử tất cả số hộp cơm làm ra đều được bán hết trong ngày. Hỏi cửa hàng nên nấu bao nhiêu hộp cơm mỗi loại để lợi nhuận thu được là cao nhất?
+	\\loigiai{
+Gọi số hộp cơm gà, cơm bò và cơm cá mà cửa hàng cần nấu lần lượt là $x,y,z$ (hộp). \\\\
+Điều kiện: $x,y,z\\in\\mathbb N^*$ \\par
+Theo đề bài, ta có các điều kiện sau:
+\\begin{itemize}
+	\\item Số lượng mỗi loại: $x > 50 \\implies x \\ge 51$; $y \\ge 40$; $z \\ge 40$.
+	\\item Tổng chi phí không vượt quá $3500000$ đồng: 
+	$$25000x + 35000y + 20000z \\le 3500000 \\iff 5x + 7y + 4z \\le 700 \\quad (1)$$
+\\end{itemize}
+
+Tổng lợi nhuận thu được trong ngày là:
+$$L = 8000x + 10000y + 6000z \\text{ (đồng)}$$
+
+Từ $(1)$, ta suy ra $5x \\le 700 - 7y - 4z \\implies x \\le 140 - 1{,}4y - 0{,}8z$. \\\\
+Thay vào biểu thức tính lợi nhuận $L$, ta có:
+$$\\begin{aligned} L &= 1000 \\cdot (8x + 10y + 6z) \\\\ &\\le 1000 \\cdot \\left[ 8(140 - 1{,}4y - 0{,}8z) + 10y + 6z \\right] \\\\ &= 1000 \\cdot (1120 - 11{,}2y - 6{,}4z + 10y + 6z) \\\\ &= 1000 \\cdot (1120 - 1{,}2y - 0{,}4z) \\end{aligned}$$
+
+Do $y \\ge 40$ và $z \\ge 40$ nên:
+$$L \\le 1000 \\cdot (1120 - 1{,}2 \\cdot 40 - 0{,}4 \\cdot 40) = 1000 \\cdot (1120 - 48 - 16) = 1056000$$
+
+Vậy lợi nhuận lớn nhất có thể đạt được là $1056000$ đồng. \\\\
+Dấu "=" (lợi nhuận lớn nhất) xảy ra khi và chỉ khi:
+$$\\begin{cases} y = 40 \\\\ z = 40 \\\\ 5x + 7y + 4z = 700 \\end{cases} \\implies \\begin{cases} y = 40 \\\\ z = 40 \\\\ 5x + 7(40) + 4(40) = 700 \\end{cases} \\implies \\begin{cases} x = 52 \\text{ (thỏa mãn } x > 50\\text{)} \\\\ y = 40 \\text{ (thỏa mãn)} \\\\ z = 40 \\text{ (thỏa mãn)} \\end{cases}$$
+
+Vậy cửa hàng nên nấu $52$ hộp cơm gà, $40$ hộp cơm bò và $40$ hộp cơm cá để đạt được mức lợi nhuận cao nhất.
+	}
+\\end{ex}`;
+      }
+
+      init() {
+        this.initTheme();
+        this.checkAppPermissions();
+        if (window.PRELOADED_EXAM_CFG) this.timerMinutes = window.PRELOADED_EXAM_CFG.timerMinutes || 45;
+        this.timerSecondsLeft = this.timerMinutes * 60;
+        this.updateTimerDisplay();
+
+        if (window.PRELOADED_SLIDES && window.PRELOADED_SLIDES.length > 0) {
+          this.slides = window.PRELOADED_SLIDES;
+          if (window.PRELOADED_EXAM_INFO) {
+            this.examInfo = window.PRELOADED_EXAM_INFO;
+            this.updateHeaderInfo();
+          }
+          this.renderCurrentSlide();
+        } else {
+          this.loadSampleExTestPrompt();
+        }
+        if (this.isStudentMode) this.startTimerManual();
+
+        document.addEventListener('click', (e) => {
+          const wrapper = document.getElementById('theme-dropdown-wrapper');
+          if (wrapper && !wrapper.contains(e.target)) {
+            this.closeThemeMenu();
+          }
+        });
+      }
+
+      openTikzSyncModal() { document.getElementById('modal-tikz-sync').classList.remove('hidden'); }
+      closeTikzSyncModal() { document.getElementById('modal-tikz-sync').classList.add('hidden'); }
+
+      initTheme() {
+        const savedTheme = localStorage.getItem('app_theme') || 'cyber';
+        this.setTheme(savedTheme, false);
+      }
+
+      setTheme(themeName, save = true) {
+        if (!['cyber', 'aurora', 'pearl'].includes(themeName)) themeName = 'cyber';
+        this.currentTheme = themeName;
+        document.body.setAttribute('data-theme', themeName);
+        if (save) localStorage.setItem('app_theme', themeName);
+
+        const iconEl = document.getElementById('current-theme-icon');
+        const nameEl = document.getElementById('current-theme-name');
+        
+        document.querySelectorAll('.theme-check').forEach(el => el.classList.add('hidden'));
+
+        if (themeName === 'cyber') {
+          if (iconEl) iconEl.innerHTML = '<i class="fa-solid fa-moon text-indigo-400"></i>';
+          if (nameEl) nameEl.innerText = 'Cyber';
+          const check = document.querySelector('#theme-opt-cyber .theme-check');
+          if (check) check.classList.remove('hidden');
+        } else if (themeName === 'aurora') {
+          if (iconEl) iconEl.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-fuchsia-400"></i>';
+          if (nameEl) nameEl.innerText = 'Aurora';
+          const check = document.querySelector('#theme-opt-aurora .theme-check');
+          if (check) check.classList.remove('hidden');
+        } else if (themeName === 'pearl') {
+          if (iconEl) iconEl.innerHTML = '<i class="fa-solid fa-sun text-amber-500"></i>';
+          if (nameEl) nameEl.innerText = 'Ngọc Trai';
+          const check = document.querySelector('#theme-opt-pearl .theme-check');
+          if (check) check.classList.remove('hidden');
+        }
+
+        this.closeThemeMenu();
+      }
+
+      toggleThemeMenu() {
+        const menu = document.getElementById('theme-menu');
+        if (menu) menu.classList.toggle('hidden');
+      }
+
+      closeThemeMenu() {
+        const menu = document.getElementById('theme-menu');
+        if (menu) menu.classList.add('hidden');
+      }
+
+      startTimerManual() {
+        if (this.isTimerRunning || this.isExamLocked) return;
+        this.isTimerRunning = true;
+        document.getElementById('btn-start-timer').style.display = 'none';
+        this.timerInterval = setInterval(() => {
+          this.timerSecondsLeft--;
+          this.updateTimerDisplay();
+          if (this.timerSecondsLeft <= 0) {
+            clearInterval(this.timerInterval);
+            this.isTimerRunning = false;
+            this.finishExam();
+          }
+        }, 1000);
+      }
+
+      updateTimerDisplay() {
+        const display = document.getElementById('timer-display');
+        const m = Math.floor(this.timerSecondsLeft / 60);
+        const s = this.timerSecondsLeft % 60;
+        display.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }
+
+      finishExam() {
+        this.isExamLocked = true;
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.renderInteractiveSection(this.slides[this.currentIndex]);
+        this.showScoreModal();
+      }
+
+      calculateCurrentScore() {
+        let total = 0, earned = 0, html = '';
+        this.slides.forEach((s, i) => {
+          let st = '', ans = this.userAnswers[s.id];
+          if (s.type === 'MCQ') {
+            total++;
+            if (ans === undefined) { st = '<span class="text-amber-500 font-bold">Chưa làm</span>'; }
+            else if (ans === s.correctIndex) { earned++; st = '<span class="text-emerald-500 font-bold">Đúng (+1đ)</span>'; }
+            else { st = '<span class="text-rose-500 font-bold">Sai</span>'; }
+          } else if (s.type === 'TF') {
+            total++;
+            let itemPts = 0;
+            let totalItems = (s.tfItems || []).length;
+            if (totalItems > 0 && ans) {
+              (s.tfItems || []).forEach((item, subIdx) => {
+                if (ans[subIdx] === item.correct) itemPts += (1 / totalItems);
+              });
+              earned += itemPts;
+              st = `<span class="text-emerald-500 dark:text-emerald-400 font-bold">+${itemPts.toFixed(2)}đ</span>`;
+            } else {
+              st = '<span class="text-amber-500 font-bold">Chưa làm</span>';
+            }
+          } else if (s.type === 'SA') {
+            total++;
+            let cleanUser = (ans || '').trim().replace(/\s+/g, '');
+            let cleanTarget = (s.correctAnswer || '').trim().replace(/\s+/g, '');
+            if (!ans) { st = '<span class="text-amber-500 font-bold">Chưa làm</span>'; }
+            else if (cleanUser === cleanTarget) { earned++; st = '<span class="text-emerald-500 font-bold">Đúng (+1đ)</span>'; }
+            else { st = '<span class="text-rose-500 font-bold">Sai</span>'; }
+          } else {
+            st = '<span class="text-purple-400 font-bold">Tự luận</span>';
+          }
+          html += `<div class="p-3 rounded-xl theme-box flex justify-between text-xs"><span class="font-bold text-brand-500">Câu ${i+1} (${s.type})</span>${st}</div>`;
+        });
+        let score = total > 0 ? (earned / total) * 10 : 0;
+        return { score: Math.round(score * 10) / 10, html };
+      }
+
+      showScoreModal() {
+        const stats = this.calculateCurrentScore();
+        document.getElementById('score-val').innerText = stats.score.toFixed(1);
+        document.getElementById('score-breakdown-list').innerHTML = stats.html;
+        document.getElementById('modal-score').classList.remove('hidden');
+      }
+      closeScoreModal() { document.getElementById('modal-score').classList.add('hidden'); }
+
+      renderMath() {
+        if (window.MathJax) {
+          if (typeof window.MathJax.typesetPromise === 'function') {
+            window.MathJax.typesetPromise().catch(err => console.warn(err));
+          } else if (typeof window.MathJax.typeset === 'function') {
+            window.MathJax.typeset();
+          }
+        }
+      }
+
+      handleToggleSolution() {
+        this.showSolution = !this.showSolution;
+        const btnText = document.getElementById('sol-btn-text');
+        const icon = document.getElementById('sol-icon');
+        const drawer = document.getElementById('solution-drawer');
+
+        if (this.showSolution) {
+          btnText.innerText = 'Đóng lời giải'; icon.className = 'fa-solid fa-eye-slash text-amber-500 mr-1';
+          drawer.classList.remove('hidden');
+        } else {
+          btnText.innerText = 'Mở lời giải'; icon.className = 'fa-solid fa-lock text-amber-500 mr-1';
+          drawer.classList.add('hidden');
+        }
+        this.renderInteractiveSection(this.slides[this.currentIndex]);
+        this.renderMath();
+        this.reprocessTikZ();
+      }
+
+      /* BỘ BẢO VỆ & XỬ LÝ CHUỖI LATEX SẠCH SẼ - AN TOÀN BẢO VỆ CÁC DẤU < VÀ > */
+      cleanTeXText(str) {
+        if (!str) return '';
+        let s = str;
+
+        // 1. Dọn dẹp comment TeX
+        s = s.replace(/%\[.*?\]/g, '');
+
+        // 2. Bảo vệ khối HTML sẵn có (như thẻ <div>, <img> từ CDN TikZ)
+        const htmlBlocks = [];
+        s = s.replace(/(<div[\s\S]*?<\/div>|<img[\s\S]*?\/>|<span[\s\S]*?<\/span>)/gi, (m) => {
+          htmlBlocks.push(m);
+          return `___HTML_BLOCK_${htmlBlocks.length - 1}___`;
+        });
+
+        // 3. Bảo vệ \includegraphics
+        s = s.replace(/\\includegraphics(?:\[.*?\])?\{([^}]+)\}/g, (match, src) => {
+          htmlBlocks.push(`<div class="tikz-img-container w-full flex justify-center my-3"><img src="${src}" class="max-w-full max-h-[300px] h-auto rounded-xl border border-slate-700/30 bg-white p-2 shadow-lg" /></div>`);
+          return `___HTML_BLOCK_${htmlBlocks.length - 1}___`;
+        });
+
+        // 4. Bảo vệ khối TikZ
+        const tikzBlocks = [];
+        const tikzRegex = /\\begin\{tikzpicture\}([\s\S]*?)\\end\{tikzpicture\}/g;
+        s = s.replace(tikzRegex, (match) => {
+          tikzBlocks.push(`<div class="tikz-container w-full flex justify-center my-2"><script type="text/tikz">\n${match}\n<\/script></div>`);
+          return `___TIKZ_BLOCK_${tikzBlocks.length - 1}___`;
+        });
+
+        // 5. TỰ ĐỘNG CHUYỂN DẤU < VÀ > THÀNH HTML ENTITY BẢO VỆ MỌI CÔNG THỨC TOÁN NHƯ (AB<AC) HOẶC x>50
+        s = s.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        // 6. Tự động bọc toán cho \triangle và \angle nếu nằm ngoài $ $
+        s = s.replace(/(^|[^\$])\\triangle\s*([A-Za-z0-9]+)/g, '$1$\\triangle $2$');
+        s = s.replace(/(^|[^\$])\\angle\s*([A-Za-z0-9]+)/g, '$1$\\angle $2$');
+
+        // 7. Thay thế khoảng trắng TeX \, bị đọng thành khoảng trắng thường
+        s = s.replace(/\\,/g, ' ');
+
+        // 8. Chuyển đổi cấu trúc danh sách TeX sang HTML
+        s = s.replace(/\\begin\{center\}/g, '<div class="w-full flex justify-center my-4 overflow-x-auto">');
+        s = s.replace(/\\end\{center\}/g, '</div>');
+        s = s.replace(/\\begin\{itemchoice\}/g, '<ul class="space-y-1.5 my-2">');
+        s = s.replace(/\\end\{itemchoice\}/g, '</ul>');
+        s = s.replace(/\\itemch/g, '<li class="text-xs opacity-90">');
+
+        s = this.parseTeXLists(s);
+
+        // 9. Các định dạng văn bản cơ bản
+        s = s.replace(/\\lq\\lq/g, '“').replace(/\\rq\\rq/g, '”');
+        s = s.replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>');
+        s = s.replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>');
+        s = s.replace(/\\\\/g, '<br/>');
+        s = s.replace(/\\par/g, '<br/>');
+        s = s.replace(/\\noindent/g, '');
+
+        // 10. Phục hồi các khối TikZ và HTML ban đầu
+        s = s.replace(/___TIKZ_BLOCK_(\d+)___/g, (_, idx) => tikzBlocks[parseInt(idx)]);
+        s = s.replace(/___HTML_BLOCK_(\d+)___/g, (_, idx) => htmlBlocks[parseInt(idx)]);
+
+        return s.trim();
+      }
+
+      parseTeXLists(text) {
+        let result = text;
+        const listRegex = /\\begin\{(enumerate|itemize)\}((?:(?!\\begin\{|\\end\{)[\s\S])*?)\\end\{\1\}/;
+        let maxIterations = 50; 
+        
+        while (listRegex.test(result) && maxIterations-- > 0) {
+          result = result.replace(listRegex, (match, envType, innerContent) => {
+            const rawItems = innerContent.split(/\\item\s*/);
+            let htmlItems = '';
+            for (let i = 0; i < rawItems.length; i++) {
+              let itemText = rawItems[i].trim();
+              if (itemText.length > 0) htmlItems += `<li>${itemText}</li>`;
+            }
+            const cssClass = envType === 'enumerate' ? 'tex-list-enum' : 'tex-list-item';
+            const tag = envType === 'enumerate' ? 'ol' : 'ul';
+            return `<${tag} class="${cssClass}">${htmlItems}</${tag}>`;
+          });
+        }
+        return result;
+      }
+
+      extractBraceContent(str, startIndex) {
+        let openIdx = str.indexOf('{', startIndex);
+        if (openIdx === -1) return null;
+        let depth = 0, inEscape = false;
+        for (let i = openIdx; i < str.length; i++) {
+          let char = str[i];
+          if (char === '\\' && !inEscape) { inEscape = true; continue; }
+          if (!inEscape) { if (char === '{') depth++; else if (char === '}') depth--; }
+          else inEscape = false;
+          if (depth === 0) return { content: str.substring(openIdx + 1, i), endIndex: i };
+        }
+        return null;
+      }
+
+      extractMultipleBraceGroups(str, startIndex, maxCount) {
+        let groups = []; let curr = startIndex;
+        for (let k = 0; k < maxCount; k++) {
+          let res = this.extractBraceContent(str, curr);
+          if (!res) break;
+          groups.push(res.content);
+          curr = res.endIndex + 1;
+        }
+        return groups;
+      }
+
+      parseExTestContent(texCode) {
+        const dethiRegex = /\\begin\{dethi\}(?:\[.*?\])?([\s\S]*?)\\end\{dethi\}/;
+        const dethiMatch = texCode.match(dethiRegex);
+        
+        if (dethiMatch) {
+            let inner = dethiMatch[1];
+            let braceRegex = /\{([^{}]*)\}/g;
+            let braces = [];
+            let m;
+            while ((m = braceRegex.exec(inner)) !== null && braces.length < 5) {
+                braces.push(m[1]);
+            }
+            const cleanTex = (str) => str ? str.replace(/\\&/g, '&').replace(/\$/g, '').trim() : '';
+
+            this.examInfo = {
+                department: cleanTex(braces[0]) || "SỞ/PHÒNG GD&ĐT...",
+                school: cleanTex(braces[1]) || "TÊN TRƯỜNG...",
+                examName: cleanTex(braces[2]) || "BÀI KIỂM TRA ĐÁNH GIÁ",
+                year: cleanTex(braces[3]) || "",
+                subject: cleanTex(braces[4]) || ""
+            };
+        } else {
+            this.examInfo = { department: "", school: "HỆ THỐNG THI", examName: "BÀI TẬP", year: "", subject: "" };
+        }
+        this.updateHeaderInfo();
+
+        let parsedSlides = [];
+        const blockRegex = /\\begin\{(ex|bt)\}([\s\S]*?)\\end\{\1\}/g;
+        let match; let idx = 1;
+
+        while ((match = blockRegex.exec(texCode)) !== null) {
+          let envType = match[1];
+          let rawContent = match[2];
+          let body = rawContent.replace(/%\[.*?\]/g, '').trim();
+          
+          body = body.replace(/^(?:\\textbf\{)?\s*(?:Câu|Bài)\s*\d+\s*[.:]?\s*(?:\})?\s*(?:\\par\s*|\\\\\s*|\n\s*)?/i, '');
+          
+          let solution = "Chưa có lời giải.";
+          let loigiaiIdx = body.indexOf('\\loigiai');
+          
+          if (loigiaiIdx !== -1) {
+            let solRes = this.extractBraceContent(body, loigiaiIdx);
+            if (solRes) {
+              solution = solRes.content;
+              body = body.substring(0, loigiaiIdx) + body.substring(solRes.endIndex + 1);
+            }
+          }
+
+          let qType = envType === 'bt' ? 'Essay' : 'MCQ';
+          let options = [], correctIndex = 0, tfItems = [], saAnswer = "";
+          
+          if (body.includes('\\choiceTF')) {
+            qType = 'TF';
+            let choiceIdx = body.indexOf('\\choiceTF');
+            body = body.substring(0, choiceIdx).trim();
+            let braceRes = this.extractMultipleBraceGroups(rawContent.substring(rawContent.indexOf('\\choiceTF')), 0, 4);
+            const labels = ['a', 'b', 'c', 'd'];
+            braceRes.forEach((grp, i) => {
+              let isTrue = grp.includes('\\True');
+              let cleanItem = grp.replace(/\\True/g, '').trim();
+              tfItems.push({
+                label: labels[i],
+                statement: this.cleanTeXText(cleanItem),
+                correct: isTrue
+              });
+            });
+          } else if (body.includes('\\choice')) {
+            qType = 'MCQ';
+            let choiceIdx = body.indexOf('\\choice');
+            body = body.substring(0, choiceIdx).trim();
+            let braceRes = this.extractMultipleBraceGroups(rawContent.substring(rawContent.indexOf('\\choice')), 0, 4);
+            const optPrefixes = ['A. ', 'B. ', 'C. ', 'D. '];
+            braceRes.forEach((grp, i) => {
+              if (grp.includes('\\True')) correctIndex = i;
+              options.push(optPrefixes[i] + this.cleanTeXText(grp.replace(/\\True/g, '').trim()));
+            });
+          } else {
+            const saRegex = /(?:\\par\s*)?\\shortans(?:\[.*?\])?\s*\{([^}]+)\}/;
+            const saMatch = body.match(saRegex);
+            if (saMatch) {
+              qType = 'SA';
+              saAnswer = saMatch[1].trim();
+              body = body.replace(saRegex, '').trim();
+            }
+          }
+
+          parsedSlides.push({
+            id: idx++, title: `Câu ${idx - 1}`, type: qType,
+            question: this.cleanTeXText(body),
+            options: options, correctIndex: correctIndex,
+            tfItems: tfItems, correctAnswer: saAnswer,
+            solution: this.cleanTeXText(solution)
+          });
+        }
+        return parsedSlides;
+      }
+
+      updateHeaderInfo() {
+        if (!this.examInfo) return;
+        const elSchool = document.getElementById('header-school-name');
+        const elDept = document.getElementById('header-dept-name');
+        const elSubject = document.getElementById('header-subject-name');
+        const elBadge = document.getElementById('badge-app-mode');
+
+        if (elDept) elDept.innerText = this.examInfo.department;
+        if (elSchool) elSchool.innerText = this.examInfo.school.toUpperCase();
+        
+        if (elSubject) {
+            if (this.examInfo.subject) {
+                elSubject.innerText = `• Môn: ${this.examInfo.subject}`;
+                elSubject.classList.remove('hidden');
+            } else {
+                elSubject.classList.add('hidden');
+            }
+        }
+        
+        if (elBadge) {
+            let badgeText = this.examInfo.examName;
+            if (this.examInfo.year) badgeText += ` (${this.examInfo.year})`;
+            elBadge.innerText = badgeText;
+        }
+      }
+
+      loadSampleExTestPrompt() {
+        this.slides = this.parseExTestContent(this.rawSampleTeX);
+        this.currentIndex = 0; this.userAnswers = {};
+        this.renderCurrentSlide(); this.closeImportModal();
+      }
+
+      openImportModal() { document.getElementById('import-tex-input').value = this.rawSampleTeX; document.getElementById('modal-import').classList.remove('hidden'); }
+      closeImportModal() { document.getElementById('modal-import').classList.add('hidden'); }
+      
+      processImportedTeX() {
+        const code = document.getElementById('import-tex-input').value;
+        this.slides = this.parseExTestContent(code);
+        this.currentIndex = 0; this.userAnswers = {};
+        this.renderCurrentSlide(); this.closeImportModal();
+        this.showToast(`Đã nạp thành công ${this.slides.length} câu!`);
+      }
+
+      renderCurrentSlide() {
+        if (this.slides.length === 0) return;
+        const slide = this.slides[this.currentIndex];
+        document.getElementById('badge-question-num').innerText = slide.title;
+        
+        let typeText = 'Trắc nghiệm 4 lựa chọn';
+        if (slide.type === 'TF') typeText = 'Trắc nghiệm Đúng / Sai';
+        else if (slide.type === 'SA') typeText = 'Trả lời ngắn';
+        else if (slide.type === 'Essay') typeText = 'Bài tập tự luận';
+        document.getElementById('badge-type').innerText = typeText;
+        
+        document.getElementById('slide-title').innerText = slide.title;
+        document.getElementById('slide-question-body').innerHTML = slide.question;
+        document.getElementById('slide-solution-body').innerHTML = slide.solution;
+        
+        const drawer = document.getElementById('solution-drawer');
+        if (this.showSolution) drawer.classList.remove('hidden');
+        else drawer.classList.add('hidden');
+
+        this.renderInteractiveSection(slide);
+        
+        this.renderMath();
+        this.reprocessTikZ();
+
+        document.getElementById('presentation-progress').style.width = `${((this.currentIndex + 1) / this.slides.length) * 100}%`;
+      }
+      
+      reprocessTikZ() {
+          setTimeout(() => {
+              if (typeof processTikZScripts === 'function') {
+                  document.querySelectorAll('.tikz-container svg').forEach(svg => svg.remove());
+                  processTikZScripts();
+              }
+          }, 100);
+      }
+
+      renderInteractiveSection(slide) {
+        const container = document.getElementById('interactive-content');
+        container.innerHTML = '';
+        
+        if (slide.type === 'MCQ') {
+          const grid = document.createElement('div');
+          grid.className = 'grid grid-cols-1 gap-2.5';
+          (slide.options || []).forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            const isSelected = this.userAnswers[slide.id] === idx;
+            const isCorrect = idx === slide.correctIndex;
+            let borderClass = isSelected ? 'border-brand-500 bg-brand-500/20 text-brand-500 font-bold' : 'theme-box';
+            if (this.showSolution) {
+              if (isCorrect) borderClass = 'border-emerald-500 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold';
+              else if (isSelected) borderClass = 'border-rose-500 bg-rose-500/20 text-rose-600 dark:text-rose-400';
+            }
+            btn.className = `w-full text-left p-3 rounded-xl border text-xs transition-all ${borderClass}`;
+            btn.innerHTML = opt;
+            btn.onclick = () => { if(!this.isExamLocked) { this.userAnswers[slide.id] = idx; this.renderInteractiveSection(slide); }};
+            grid.appendChild(btn);
+          });
+          container.appendChild(grid);
+        } else if (slide.type === 'TF') {
+          const list = document.createElement('div');
+          list.className = 'space-y-2';
+          if (!this.userAnswers[slide.id]) this.userAnswers[slide.id] = {};
+
+          (slide.tfItems || []).forEach((item, idx) => {
+            const userChoice = this.userAnswers[slide.id][idx];
+            const row = document.createElement('div');
+            row.className = 'p-2.5 rounded-xl theme-box flex items-center justify-between gap-2 text-xs';
+            
+            let trueBtn = userChoice === true ? 'bg-emerald-600 text-white' : 'theme-box text-slate-400';
+            let falseBtn = userChoice === false ? 'bg-rose-600 text-white' : 'theme-box text-slate-400';
+
+            if (this.showSolution) {
+              if (item.correct) trueBtn = 'bg-emerald-600 text-white ring-2 ring-emerald-400 font-bold';
+              else falseBtn = 'bg-emerald-600 text-white ring-2 ring-emerald-400 font-bold';
+            }
+
+            row.innerHTML = `
+              <span class="font-medium"><strong>${item.label})</strong> ${item.statement}</span>
+              <div class="flex gap-1.5 shrink-0">
+                <button onclick="app.setTFChoice(${slide.id}, ${idx}, true)" class="px-2.5 py-1 rounded-lg ${trueBtn} text-[11px] font-bold">Đúng</button>
+                <button onclick="app.setTFChoice(${slide.id}, ${idx}, false)" class="px-2.5 py-1 rounded-lg ${falseBtn} text-[11px] font-bold">Sai</button>
+              </div>
+            `;
+            list.appendChild(row);
+          });
+          container.appendChild(list);
+        } else if (slide.type === 'SA') {
+          const val = this.userAnswers[slide.id] || '';
+          container.innerHTML = `
+            <div class="space-y-3">
+              <label class="block text-xs font-semibold theme-text-muted">Nhập kết quả/đáp số của bạn:</label>
+              <input type="text" value="${val}" onchange="app.userAnswers[${slide.id}]=this.value" class="w-full theme-input rounded-xl p-3 text-sm font-mono text-amber-500 dark:text-amber-300 focus:border-amber-400 focus:outline-none" placeholder="Nhập đáp số..." />
+              ${this.showSolution ? `<div class="p-2.5 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">Đáp số đúng: ${slide.correctAnswer}</div>` : ''}
+            </div>
+          `;
+        } else {
+          container.innerHTML = `<div class="p-4 rounded-xl theme-box text-xs opacity-80 flex flex-col gap-2">
+            <div class="flex items-center"><i class="fa-solid fa-pen-clip mr-2 text-brand-500"></i> Bài tập tự luận.</div>
+            <div class="pl-5 text-[11px] theme-text-muted">Xem lời giải để đối chiếu đáp án chi tiết.</div>
+          </div>`;
+        }
+      }
+
+      setTFChoice(slideId, itemIdx, choice) {
+        if (this.isExamLocked) return;
+        if (!this.userAnswers[slideId]) this.userAnswers[slideId] = {};
+        this.userAnswers[slideId][itemIdx] = choice;
+        this.renderInteractiveSection(this.slides[this.currentIndex]);
+      }
+
+      nextSlide() { if (this.currentIndex < this.slides.length - 1) { this.currentIndex++; this.renderCurrentSlide(); } }
+      prevSlide() { if (this.currentIndex > 0) { this.currentIndex--; this.renderCurrentSlide(); } }
+
+      checkAppPermissions() {
+        if (window.IS_STUDENT_MODE) {
+          this.isStudentMode = true;
+          document.querySelectorAll('.teacher-only').forEach(el => el.style.display = 'none');
+          const badge = document.getElementById('badge-app-mode');
+          if (badge) {
+            badge.className = 'text-[11px] px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-500 border border-cyan-500/40 font-semibold shadow-sm';
+          }
+        }
+      }
+
+      openExportModal() { document.getElementById('modal-export').classList.remove('hidden'); }
+      closeExportModal() { document.getElementById('modal-export').classList.add('hidden'); }
+
+      exportHTML(mode) {
+        const cfgTimer = parseInt(document.getElementById('export-cfg-timer').value) || 45;
+        this.closeExportModal();
+        let cloneDoc = document.documentElement.cloneNode(true);
+        
+        cloneDoc.querySelectorAll('.tikz-container svg').forEach(svg => svg.remove());
+        
+        let flagScript = cloneDoc.querySelector('#student-mode-flag');
+        if (!flagScript) {
+          flagScript = document.createElement('script');
+          flagScript.id = 'student-mode-flag';
+          cloneDoc.querySelector('head').appendChild(flagScript);
+        }
+        
+        const infoData = JSON.stringify(this.examInfo).replace(/</g, '\\u003c');
+        const slidesData = JSON.stringify(this.slides).replace(/</g, '\\u003c');
+
+        flagScript.textContent = `
+          window.IS_STUDENT_MODE = ${mode === 'student'}; 
+          window.PRELOADED_EXAM_INFO = ${infoData}; 
+          window.PRELOADED_SLIDES = ${slidesData};
+          window.PRELOADED_EXAM_CFG = { timerMinutes: ${cfgTimer} };
+        `;
+
+        const blob = new Blob(["<!DOCTYPE html>\n" + cloneDoc.outerHTML], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = mode === 'student' ? `DeThi_HocSinh.html` : `DeThi_GiaoVien.html`;
+        a.click();
+        this.showToast(mode === 'student' ? 'Đã tải BẢN HỌC SINH!' : 'Đã tải BẢN GIÁO VIÊN!');
+      }
+
+      showToast(msg) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'glass-card px-4 py-2.5 rounded-xl text-xs font-semibold shadow-xl border border-slate-500/30 flex items-center gap-2 animate-bounce';
+        toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-500"></i> ${msg}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 2800);
+      }
+    }
+
+    let app;
+    window.addEventListener('DOMContentLoaded', () => { app = new LaTeXPresenterApp(); app.init(); });
+  </script>
+
+</body></html>
